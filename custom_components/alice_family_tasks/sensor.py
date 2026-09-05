@@ -43,6 +43,7 @@ class FamilyTasksSummarySensor(CoordinatorEntity[FamilyTasksCoordinator], Sensor
     def extra_state_attributes(self) -> dict[str, object]:
         return {
             "recipients": self.coordinator.data.get("recipients", []),
+            "day": self.coordinator.data.get("day"),
             "card_url": CARD_URL,
             "webhook_path": f"/api/webhook/{self._entry.data[CONF_WEBHOOK_ID]}",
             "integration": DOMAIN,

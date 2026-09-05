@@ -37,13 +37,19 @@
 
 ```yaml
 type: custom:alice-family-tasks-card
-entity: sensor.semeinye_zadachi_aktualnye_zadachi
+entity: sensor.aktualnye_zadachi
 show_completed: true
 ```
 
 Точный `entity_id` итогового сенсора можно посмотреть на странице интеграции.
 
-## Алиса
+## Алиса через Home Assistant
+
+Если в Home Assistant уже есть endpoint `/api/yandex_dialogs`, укажите его внешний HTTPS-адрес как **Webhook URL** приватного навыка. Интеграция слушает событие `yandex_intent`, добавляет задачу и возвращает Алисе ответ через `yandex_intent_response`.
+
+Отключите прежние автоматизации, которые слушают то же событие, иначе одна команда будет обработана дважды.
+
+## Алиса через Cloud Function
 
 В корне репозитория лежит `index.py` для Yandex Cloud Functions. Создайте функцию Python 3.12, укажите точку входа `index.handler` и переменную окружения:
 

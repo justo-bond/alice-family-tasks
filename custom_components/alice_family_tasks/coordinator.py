@@ -44,8 +44,9 @@ class FamilyTasksCoordinator(DataUpdateCoordinator[dict[str, Any]]):
     async def _async_update_data(self) -> dict[str, Any]:
         recipients = self.recipients
         entities = [item[CONF_TODO_ENTITY] for item in recipients]
+        today = dt_util.now().date().isoformat()
         if not entities:
-            return {"total": 0, "recipients": []}
+            return {"total": 0, "recipients": [], "day": today}
 
         response = await self.hass.services.async_call(
             "todo",
@@ -55,7 +56,6 @@ class FamilyTasksCoordinator(DataUpdateCoordinator[dict[str, Any]]):
             blocking=True,
             return_response=True,
         )
-        today = dt_util.now().date().isoformat()
         result: list[dict[str, Any]] = []
         total = 0
         for recipient in recipients:
@@ -76,4 +76,4 @@ class FamilyTasksCoordinator(DataUpdateCoordinator[dict[str, Any]]):
                     "count": len(visible),
                 }
             )
-        return {"total": total, "recipients": result}
+        return {"total": total, "recipients": result, "day": today}
