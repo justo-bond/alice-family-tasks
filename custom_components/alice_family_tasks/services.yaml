@@ -1,0 +1,40 @@
+process_command:
+  name: Обработать команду
+  description: Разбирает исходную фразу, находит получателя и дату, затем добавляет задачу.
+  fields:
+    command:
+      name: Команда
+      required: true
+      example: "Паргеву взять форму завтра"
+      selector:
+        text:
+    entry_id:
+      name: Идентификатор настройки
+      required: false
+      selector:
+        text:
+
+add_task:
+  name: Добавить задачу
+  description: Добавляет задачу конкретному получателю без разбора фразы.
+  fields:
+    recipient:
+      name: Получатель
+      required: true
+      selector:
+        text:
+    text:
+      name: Задача
+      required: true
+      selector:
+        text:
+    due:
+      name: Дата
+      required: false
+      selector:
+        date:
+    entry_id:
+      name: Идентификатор настройки
+      required: false
+      selector:
+        text:

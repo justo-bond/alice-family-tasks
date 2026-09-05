@@ -1,0 +1,59 @@
+{
+  "title": "Alice Family Tasks",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Family tasks",
+        "description": "Add the first recipient. Add more recipients later through Configure.",
+        "data": {
+          "integration_name": "Name",
+          "name": "Recipient name",
+          "aliases": "Comma-separated aliases",
+          "todo_entity": "To-do list"
+        }
+      }
+    },
+    "abort": { "single_instance_allowed": "The integration is already configured." },
+    "error": {
+      "alias_conflict": "The name or alias conflicts with a broadcast alias",
+      "name_required": "Enter a recipient name"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Recipients",
+        "menu_options": {
+          "add_recipient": "Add recipient",
+          "edit_recipient": "Edit recipient",
+          "remove_recipient": "Remove recipient",
+          "general": "Broadcast aliases"
+        }
+      },
+      "add_recipient": {
+        "title": "Add recipient",
+        "data": { "name": "Name", "aliases": "Comma-separated aliases", "todo_entity": "To-do list" }
+      },
+      "edit_recipient": { "title": "Choose recipient", "data": { "id": "Recipient" } },
+      "edit_recipient_details": {
+        "title": "Edit recipient",
+        "data": { "name": "Name", "aliases": "Comma-separated aliases", "todo_entity": "To-do list" }
+      },
+      "remove_recipient": {
+        "title": "Remove recipient",
+        "description": "The to-do list and its tasks will not be deleted.",
+        "data": { "id": "Recipient" }
+      },
+      "general": {
+        "title": "Broadcast aliases",
+        "description": "These phrases add the task to every recipient.",
+        "data": { "all_aliases": "Comma-separated aliases" }
+      }
+    },
+    "error": {
+      "name_required": "Enter a recipient name",
+      "todo_in_use": "This list is assigned to another recipient",
+      "alias_conflict": "An alias is already in use"
+    }
+  }
+}
