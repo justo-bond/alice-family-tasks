@@ -46,7 +46,9 @@ MONTH_RE = re.compile(
 NUMERIC_RE = re.compile(
     r"(?<!\w)(?:(?:на|в)\s+)?(\d{1,2})[./-](\d{1,2})(?:[./-](\d{2,4}))?(?!\w)"
 )
-WEEKDAY_RE = re.compile(r"(?<!\w)(?:(?:на|в)\s+)?(" + "|".join(WEEKDAYS) + r")(?!\w)")
+WEEKDAY_RE = re.compile(
+    r"(?<!\w)(?:(?:на|в|во)\s+)?(" + "|".join(WEEKDAYS) + r")(?!\w)"
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -61,7 +63,7 @@ class ParsedTask:
 def normalize(value: str) -> str:
     """Normalize text for matching while preserving date punctuation."""
     value = value.casefold().replace("ё", "е")
-    value = re.sub(r"[,!?;:]+", " ", value)
+    value = re.sub(r"[,!?;]+", " ", value)
     return re.sub(r"\s+", " ", value).strip()
 
 

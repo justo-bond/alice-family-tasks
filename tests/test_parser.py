@@ -69,6 +69,26 @@ class CommandParserTest(unittest.TestCase):
         self.assertEqual(result.recipient_ids, ("anna",))
         self.assertEqual(result.due, date(2026, 9, 7))
 
+    def test_parses_vo_vtornik(self):
+        result = parser.parse_command(
+            "Паргеву тренировка во вторник",
+            RECIPIENTS,
+            ["всем"],
+            today=date(2026, 9, 5),
+        )
+        self.assertEqual(result.text, "тренировка")
+        self.assertEqual(result.due, date(2026, 9, 8))
+
+    def test_preserves_time_in_task_text(self):
+        result = parser.parse_command(
+            "маме позвонить врачу в 18:00 завтра",
+            RECIPIENTS,
+            ["всем"],
+            today=date(2026, 9, 5),
+        )
+        self.assertEqual(result.text, "позвонить врачу в 18:00")
+        self.assertEqual(result.due, date(2026, 9, 6))
+
     def test_parses_calendar_date(self):
         result = parser.parse_command(
             "сыну соревнования 12 сентября",
